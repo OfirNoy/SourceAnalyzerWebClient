@@ -14,9 +14,9 @@
     <VueDraggableResizable  ref="draggableBuild" class-name="draggable" v-show="isBuildShowing" :z="100" :w="300" :h="300" :min-width="100" :min-height="100" :parent="false">
         <Build class="floatingContent"/>
     </VueDraggableResizable>
-    
-    <div v-if="isDownload"> 
-      <img src="img/pixelated-hourglass-loading.gif"/>
+    <div class="status" v-if="isDownload"> 
+      <div style="position:fixed;width:100%"><span>{{ message }}</span></div>
+      <div><img src="img/pixelated-hourglass-loading.gif"/></div>
     </div>
 
     <div id="3d-graph">        
@@ -59,7 +59,8 @@ export default {
         buildButtonStyle: 'tbbutton tbunselected',
         graph: ForceGraph(),
         branchList: [],
-        pollInterval: null
+        pollInterval: null,
+        message: ""
     }
   },  
   mounted(){    
@@ -88,6 +89,7 @@ export default {
       Axios.get(`analyzer/${encodedUrl}`)
         .then((response) => {                      
           if(response.status == 202 && this.pollInterval == null){
+            this.drawGraph({nodes:[], links:[]});//Clear graph
             console.log('Server is processing, start polling');
             this.isDownload = true;
             this.pollInterval = setInterval(function () {
@@ -97,17 +99,20 @@ export default {
               console.log('Timeout: Stop polling');
               clearInterval(this.pollInterval); 
               this.pollInterval = null;
+              this.message = "Stopped polling, no data received";
             }, 36000000); //stop polling after an hour
           }
           else if(response.status == 200){
             this.isDownload = false;
+            this.message = "";
             console.log('Graph received');
             clearInterval(this.pollInterval);
             this.pollInterval = null;
             this.drawGraph(response.data);
           }
           else{
-            console.log(`${response.status}: ${response.data}`);
+            console.log(`${response.status}: ${response.data.message}`);
+            this.message = response.data.message;
           }
         })
         .catch(err => {
@@ -236,6 +241,12 @@ export default {
   width: 100%;
   display: flex;
   justify-content: center;
+}
+.status{
+  top: 180px;
+  left: 250px;
+  position: fixed;  
+  display: flex;  
 }
 .tbbutton {
   width: 300px;
