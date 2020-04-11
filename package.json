@@ -1,0 +1,41 @@
+{
+  "name": "source-analyzer-client",
+  "version": "1.0.0",
+  "description": "Web client for the source analyzer server",
+  "private": false,
+  "dependencies": {
+    "axios": "^0.18.1",
+    "bootstrap": "^4.3.1",
+    "bootstrap-vue": "^2.0.0-rc.15",
+    "child-process": "^1.0.2",
+    "force-graph": "^1.18.2",
+    "fs-readdir-recursive": "^1.1.0",
+    "md5": "^2.2.1",
+    "three": "^0.102.1",
+    "upath": "^1.1.2",
+    "vue": "^2.6.10",
+    "vue-draggable-resizable": "^2.0.0-rc1"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^5.0.0",
+    "cross-env": "^5.2.0",
+    "css-loader": "^2.1.0",
+    "eslint": "^5.14.1",
+    "file-loader": "^3.0.1",
+    "fs": "0.0.1-security",
+    "html-webpack-plugin": "^3.2.0",
+    "path": "^0.12.7",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "vue-loader": "^15.7.0",
+    "vue-template-compiler": "^2.6.10",
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3"
+  },
+  "scripts": {
+    "patch": "copy patch\\* node_modules\\vue-draggable-resizable\\dist\\",
+    "build": "eslint . --ext .js | cross-env NODE_OPTIONS=--max_old_space_size=8192 webpack --config webpack.client.config.js"
+  },
+  "author": "Ofir Noy",
+  "license": "MIT"
+}
