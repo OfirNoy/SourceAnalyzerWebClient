@@ -58,9 +58,12 @@ module.exports = {
         filename: 'index.html',
         template: 'src/client/index.html'
       }),
-      new CopyWebpackPlugin([
-        {from:'src/client/img', to:"img"} 
-    ]),    
+      new CopyWebpackPlugin(
+        {
+          patterns: [
+            { from: 'src/client/img', to: 'img' },
+          ],
+        }),    
     new VueLoaderPlugin() 
   ]
 };
