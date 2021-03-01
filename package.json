@@ -11,7 +11,7 @@
     "force-graph": "^1.18.2",
     "fs-readdir-recursive": "^1.1.0",
     "md5": "^2.2.1",
-    "three": "^0.102.1",
+    "three": "^0.125.0",
     "upath": "^1.1.2",
     "vue": "^2.6.10",
     "vue-draggable-resizable": "^2.0.0-rc1"
