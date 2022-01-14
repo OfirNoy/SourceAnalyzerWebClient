@@ -4,7 +4,7 @@
   "description": "Web client for the source analyzer server",
   "private": false,
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.15",
     "child-process": "^1.0.2",
